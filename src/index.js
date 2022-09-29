@@ -4,10 +4,26 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { createStore } from 'redux';
+import allReducers from './reducers/index'
+import { Provider } from 'react-redux'
+import { increment, loggin } from './actions/index'
+
+let store = createStore(allReducers);
+
+store.subscribe(() => console.log(store.getState()))
+
+// store.dispatch(loggin())
+
+store.dispatch(increment())
+// store.dispatch({ type: 'SIGN_IN' })
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
